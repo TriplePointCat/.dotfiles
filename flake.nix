@@ -23,9 +23,9 @@
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
-    host = "desktop";
+    host = "cyrithel";
     profile = "nvidia";
-    username = "charlie";
+    username = "imoen";
 
     overlays = [
       (final: prev: {

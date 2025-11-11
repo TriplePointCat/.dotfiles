@@ -29,7 +29,7 @@
        if [ -f $HOME/.zshrc-personal ]; then
           source $HOME/.zshrc-personal
        fi
-      krabby name shaymin --no-title
+      krabby name sylveon --no-title
       eval "$(direnv hook zsh)"
       function dev () {
         nix flake init --template "github:CharredLee/dev-templates#$@"

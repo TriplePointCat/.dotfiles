@@ -1,10 +1,13 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "TriplePointCat";
-  gitEmail = "pimstack@gmail.com";
+  gitUsername = "CharredLee";
+  gitEmail = "31701136+CharredLee@users.noreply.github.com";
 
   # Hyprland Settings
   extraMonitorSettings = "
+    monitor = HDMI-A-1, 3840x2160@60, auto-left, auto
+    monitor = DP-1, 2560x1440@144, auto, auto
+    monitor = DP-2, 3840x2160@160, auto-right, 1
   ";
   extraHardwareSettings = "
     opengl {
@@ -19,7 +22,7 @@
       damage_tracking = 0
     } 
   ";
-  defaultWallpaper = "DSCF4019.JPG";
+  defaultWallpaper = "DSCF3713.JPG";
 
   theme = "catppuccin-mocha";
 
@@ -34,12 +37,13 @@
   clock24h = true;
 
   # variables which toggle packages
+  gamedev = true;
   gaming = true;
   texlive = true;
   silly = true;
 
   # Program Options
-  browser = "firefox"; # Set Default Browser (google-chrome-stable for google-chrome)
+  browser = "zen"; # Set Default Browser (google-chrome-stable for google-chrome)
   terminal = "kitty"; # Set Default System Terminal
   keyboardLayout = "us";
   consoleKeyMap = "us";

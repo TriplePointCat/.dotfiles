@@ -1,5 +1,6 @@
 {inputs, ...}: {
   imports = [
+    ./allow.nix
     ./boot.nix
     ./fonts.nix
     ./greetd.nix

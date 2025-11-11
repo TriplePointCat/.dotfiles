@@ -305,7 +305,7 @@ in {
     };
 
     extraConfig = "
-      monitor=,preferred,auto,auto
+      monitor=,highrr,auto,auto
       ${extraMonitorSettings}
       ${extraHardwareSettings}
     ";
