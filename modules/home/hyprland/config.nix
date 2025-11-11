@@ -30,7 +30,8 @@ in {
       ];
 
       input = {
-        kb_layout = "${keyboardLayout}";
+        kb_layout = "us";
+        kb_variant = "${keyboardLayout}";
         kb_options = [
           "grp:alt_caps_toggle"
           "caps:super"

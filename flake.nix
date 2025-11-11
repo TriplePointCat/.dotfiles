@@ -1,5 +1,5 @@
 {
-  description = "charlie's nix config";
+  description = "charlotte's nix config";
 
   inputs = {
     home-manager = {

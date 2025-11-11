@@ -1,8 +1,8 @@
-# charlie's dotfiles
+# charlotte's dotfiles
 
 > [!WARNING]
 > don't use these dotfiles if you don't know what you're doing. they can brick
-> your machine. charlie is not responsible if you use them to brick your
+> your machine. charlotte is not responsible if you use them to brick your
 > machine.
 
 the content of these dotfiles started as a fork of
