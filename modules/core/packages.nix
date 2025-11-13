@@ -44,7 +44,8 @@
       brightnessctl
       clock-rs
       dust
-      element-desktop
+      # marked unsafe
+      # element-desktop
       eza
       ffmpeg
       file-roller
