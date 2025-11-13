@@ -81,6 +81,7 @@
       v4l-utils
       wget
       zoxide
+      libsForQt5.xp-pen-deco-01-v2-driver
     ]
     ++ lib.optionals config.variables.gaming [
       # TODO: move retroarch to ../home, add config
