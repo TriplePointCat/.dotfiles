@@ -9,7 +9,6 @@
     fuse.userAllowOther = true;
     virt-manager.enable = true;
     mtr.enable = true;
-    adb.enable = true;
 
     gnupg.agent = {
       enable = true;
@@ -18,7 +17,7 @@
 
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
       ];
@@ -33,6 +32,7 @@
       # e.g. because names are changed, pokemon with different forms are just... not printable to the terminal
       # so `kingler name shaymin` doesn't work, and neither does `kingler name shaymin`
       # customPkgs.kingler
+      customPkgs.datacorn
 
       (agda.withPackages [
         agdaPackages._1lab
@@ -40,16 +40,21 @@
         agdaPackages.cubical
         agdaPackages.standard-library
       ])
-      ardour
+      # fails to build 2025-11-15
+      # ardour
       brightnessctl
+      claude-code # unfortunately needed for work
       clock-rs
       dust
       # marked unsafe
       # element-desktop
+      edopro # YGO simulator
       eza
       ffmpeg
       file-roller
       fzf
+      # fails to build 2026-01-01
+      # gemini-cli
       gimp
       tuigreet
       hyprpicker
@@ -59,6 +64,7 @@
       libnotify
       libvirt
       lm_sensors
+      lmms
       lxqt.lxqt-policykit
       mask
       masklint
@@ -91,16 +97,17 @@
       # TODO: move retroarch to ../home, add config
       cemu # wii u emu
       dolphin-emu # wii/gcn emu
-      edopro # YGO simulator
       joycond
       joycond-cemuhook
       lumafly # HK mod manager
       melonDS #nds emu
       prismlauncher # minecraft launcher
-      retroarch-free # generic emu
+      # # fails to build 2026-01-01
+      # retroarch-free # generic emu
     ]
     ++ lib.optionals config.variables.gamedev [
-      aseprite
+      # broken 2026-01-01
+      # aseprite
       godot
     ]
     ++ lib.optionals config.variables.silly [

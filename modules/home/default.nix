@@ -31,6 +31,7 @@ _: {
     ./stylix.nix
     ./swaync.nix
     ./tex.nix
+    ./tmux.nix
     ./variables.nix
     ./virtmanager.nix
     ./waybar
