@@ -6,8 +6,8 @@
   # Hyprland Settings
   extraMonitorSettings = "
     monitor = HDMI-A-1, 3840x2160@60, auto-left, auto
-    monitor = DP-1, 2560x1440@144, auto, auto
-    monitor = DP-2, 3840x2160@160, auto-right, 1
+    monitor = DP-2, 2560x1440@144, auto-left, 1
+    monitor = DP-1, 3840x2160@160, auto-right, 1
   ";
   extraHardwareSettings = "
     opengl {
