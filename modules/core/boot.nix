@@ -9,20 +9,23 @@
     extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
     kernel.sysctl = {"vm.max_map_count" = 2147483642;};
     supportedFilesystems = ["ntfs"];
-    # loader.systemd-boot.enable = true;
-    # loader.efi.canTouchEfiVariables = true;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
-        gfxmodeEfi = "2560x1440";
-        # stylix manages grub theme
-        # theme = pkgs.catppuccin-grub;
-      };
+    loader.systemd-boot.enable = true;
+    loader.systemd-boot.windows = {
+      
     };
+    loader.efi.canTouchEfiVariables = true;
+    # loader = {
+    #   efi.canTouchEfiVariables = true;
+    #   grub = {
+    #     enable = true;
+    #     device = "nodev";
+    #     efiSupport = true;
+    #     useOSProber = false;
+    #     gfxmodeEfi = "2560x1440";
+    #     # stylix manages grub theme
+    #     # theme = pkgs.catppuccin-grub;
+    #   };
+    # };
 
     # Appimage Support
     binfmt.registrations.appimage = {

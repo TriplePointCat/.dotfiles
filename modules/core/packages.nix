@@ -47,7 +47,7 @@
       clock-rs
       dust
       # marked unsafe
-      # element-desktop
+      element-desktop
       edopro # YGO simulator
       eza
       ffmpeg
@@ -80,6 +80,7 @@
       qbittorrent-enhanced
       quickemu
       ripgrep
+      signal-desktop
       socat
       unrar
       unzip
@@ -88,6 +89,8 @@
       wget
       zoxide
       xivlauncher
+      qmk
+      via
       #jellyfin
       #jellyfin-web
       #jellyfin-ffmpeg

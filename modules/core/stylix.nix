@@ -38,7 +38,7 @@ in {
         sizes = fontSizes;
       };
       targets = {
-        grub.enable = true;
+        # grub.enable = true;
       };
     };
 
