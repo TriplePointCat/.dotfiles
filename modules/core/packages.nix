@@ -32,7 +32,7 @@
       # e.g. because names are changed, pokemon with different forms are just... not printable to the terminal
       # so `kingler name shaymin` doesn't work, and neither does `kingler name shaymin`
       # customPkgs.kingler
-      customPkgs.datacorn
+      # customPkgs.datacorn
 
       (agda.withPackages [
         agdaPackages._1lab
@@ -86,6 +86,7 @@
       unzip
       usbutils
       v4l-utils
+      vlc
       wget
       zoxide
       xivlauncher
@@ -104,6 +105,7 @@
       joycond-cemuhook
       lumafly # HK mod manager
       melonDS #nds emu
+      osu-lazer-bin
       prismlauncher # minecraft launcher
       # # fails to build 2026-01-01
       # retroarch-free # generic emu
