@@ -99,8 +99,9 @@
     ]
     ++ lib.optionals config.variables.gaming [
       # TODO: move retroarch to ../home, add config
-      cemu # wii u emu
-      dolphin-emu # wii/gcn emu
+      # build failure 04/13/26
+      # cemu # wii u emu
+      # dolphin-emu # wii/gcn emu
       joycond
       joycond-cemuhook
       lumafly # HK mod manager
