@@ -159,7 +159,7 @@ in {
         # most of these are stolen from JaKooLit.
         "custom/swaync" = {
           tooltip = false;
-          format = "{icon} {}";
+          format = "{icon} {text}";
           format-icons = {
             notification = "<span foreground='red'><sup></sup></span>";
             none = "";
