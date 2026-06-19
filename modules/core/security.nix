@@ -15,7 +15,7 @@ _: {
         })
       '';
     };
-    pam.services.swaylock = {
+    pam.services.hyprlock = {
       text = ''auth include login '';
     };
   };
