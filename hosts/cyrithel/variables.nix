@@ -1,27 +1,18 @@
 {
   # Git Configuration ( For Pulling Software Repos )
   gitUsername = "TriplePointCat";
-  gitEmail = "imoen.hawthorne@gmail.com";
+  gitEmail = "68162904+TriplePointCat@users.noreply.github.com";
 
   # Hyprland Settings
-  extraMonitorSettings = "
-    monitor = HDMI-A-2, 3840x2160@60, auto-left, auto
-    monitor = DP-4, 2560x1440@144, auto-left, 1
-    monitor = DP-5, 3840x2160@160, auto-right, 1
-  ";
-  extraHardwareSettings = "
-    opengl {
-      nvidia_anti_flicker = 0
-    }
+  extraMonitorSettings = [
+    { output = "DP-4"; mode = "2560x1440@144"; position = "auto"; scale = "1"; }
+    { output = "DP-5"; mode = "3840x2160@160"; position = "auto-right"; scale = "1"; }
+  ];
+  extraHardwareSettings = {
+    opengl = { nvidia_anti_flicker = 0; };
+    debug  = { damage_tracking = 0; };
+  };
 
-    misc {
-      vfr = 0
-    }
-
-    debug {
-      damage_tracking = 0
-    } 
-  ";
   defaultWallpaper = "DSCF3713.JPG";
 
   theme = "catppuccin-mocha";

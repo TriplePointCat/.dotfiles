@@ -4,11 +4,11 @@
   gitEmail = "68162904+TriplePointCat@users.noreply.github.com";
 
   # Hyprland Settings
-  extraMonitorSettings = "
-    monitor = eDP-1,1920x1080@144,auto,1
-    monitor = HDMI-A-1,highres, auto,1
-  ";
-  extraHardwareSettings = "";
+  extraMonitorSettings = [
+    { output = "eDP-1"; mode = "1920x1080@144"; position = "auto"; scale = "1"; }
+    { output = "HDMI-A-1"; mode = "highres"; position = "auto"; scale = "1"; }
+  ];
+  extraHardwareSettings = {};
   defaultWallpaper = "MST23.png";
 
   theme = "catppuccin-mocha";
