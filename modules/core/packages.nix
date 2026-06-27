@@ -80,6 +80,7 @@
       qbittorrent-enhanced
       quickemu
       ripgrep
+      reaper
       signal-desktop
       socat
       unrar
