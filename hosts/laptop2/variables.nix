@@ -4,11 +4,11 @@
   gitEmail = "31701136+658060@users.noreply.github.com";
 
   # Hyprland Settings
-  extraMonitorSettings = "
-    monitor = ,1920x1080@60,auto,1
-    monitor = HDMI-A-1, 3840x2160@60,auto-left,1
-  ";
-  extraHardwareSettings = "";
+  extraMonitorSettings = [
+    { output = "";         mode = "1920x1080@60";  position = "auto";      scale = "1"; }
+    { output = "HDMI-A-1"; mode = "3840x2160@60";  position = "auto-left"; scale = "1"; }
+  ];
+  extraHardwareSettings = {};
   defaultWallpaper = "hollow-knight.png";
 
   theme = "catppuccin-mocha";

@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    swww
+    awww
     grim
     slurp
     wl-clipboard
@@ -22,6 +22,7 @@
     };
     # enableNvidiaPatches = false;
     systemd.enable = true;
+    configType = "lua";
   };
   # Place Files Inside Home Directory
   home.file = {

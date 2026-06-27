@@ -4,23 +4,14 @@
   gitEmail = "31701136+658060@users.noreply.github.com";
 
   # Hyprland Settings
-  extraMonitorSettings = "
-    monitor = DP-1, 2560x1440@144, auto, auto
-    monitor = DP-3, 1920x1080@144, auto-right, auto
-  ";
-  extraHardwareSettings = "
-    opengl {
-      nvidia_anti_flicker = 0
-    }
-
-    misc {
-      vfr = 0
-    }
-
-    debug {
-      damage_tracking = 0
-    } 
-  ";
+  extraMonitorSettings = [
+    { output = "DP-1"; mode = "2560x1440@144"; position = "auto"; scale = "1"; }
+    { output = "DP-3"; mode = "1920x1080@144"; position = "auto-right"; scale = "1"; }
+  ];
+  extraHardwareSettings = {
+    opengl = { nvidia_anti_flicker = 0; };
+    debug  = { damage_tracking = 0; };
+  };
   defaultWallpaper = "hollow-knight.png";
 
   theme = "catppuccin-mocha";

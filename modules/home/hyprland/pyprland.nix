@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   set-wallpaper = pkgs.writeShellScriptBin "set-wallpaper" ''
-    ${pkgs.swww}/bin/swww img "$1" &
+    ${pkgs.awww}/bin/awww img "$1" &
     ${pkgs.libnotify}/bin/notify-send "Wallpaper Changed" "Set wallpaper to: $(basename "$1")" -i "$1" -t 3000
     ${pkgs.pyprland}/bin/pypr hide wallpaper_selector
   '';
@@ -20,7 +20,7 @@ in {
 
   # relies on the existence of modules/home/scripts/wallsetter-visual.nix.
 
-  home.file.".config/hypr/pyprland.toml".text = ''
+  home.file.".config/pypr/config.toml".text = ''
     [pyprland]
     plugins = [
       "scratchpads",
