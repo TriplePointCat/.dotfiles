@@ -21,7 +21,7 @@ in {
   # (`systemVariables`, see modules/core/user.nix + modules/home/variables.nix).
   options.variables = mkOption {
     description = "Host-specific variables (typed contract — see docs/adr/0003).";
-    type = types.submodule {
+    type = types.submodule ({config, ...}: {
       options = {
         # host identity
         profile = mkOption {
@@ -31,6 +31,28 @@ in {
         user = mkOption {
           type = types.str;
           description = "Primary username for this host.";
+        };
+
+        # design mode (ADR-0005) — fast visual iteration on native UI files
+        designMode = mkOption {
+          type = types.bool;
+          default = false;
+          description = ''
+            When true, design-mode UI configs (hyprland, quickshell, …) are
+            installed via mkOutOfStoreSymlink pointing at the working tree, so
+            edits are picked up by each tool's live reload with no rebuild. Only
+            ever set on the active design machine — production hosts and all
+            downstream forks must keep this false to stay pure/reproducible.
+          '';
+        };
+        dotfilesPath = mkOption {
+          type = types.str;
+          default = "/home/${config.user}/.dotfiles";
+          description = ''
+            Absolute path to the checked-out dotfiles working tree, used as the
+            mkOutOfStoreSymlink target when designMode is true. Only meaningful
+            on the design machine.
+          '';
         };
 
         # git config
@@ -199,7 +221,7 @@ in {
           description = "Secondary accent color (hex, no leading #) from the active scheme.";
         };
       };
-    };
+    });
   };
 
   config.variables = hostVariables;
