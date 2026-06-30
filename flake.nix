@@ -19,10 +19,19 @@
       flake = false;
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
     # leaving these empty in the repo to keep conflicts between machines away.
     host = "";
     profile = "";
@@ -115,6 +124,28 @@
           {nixpkgs.overlays = overlays;}
         ];
       };
+    };
+
+    # dev tooling: a self-installing commit-msg hook enforcing conventional
+    # commits. Activated by `.envrc` (`use flake`) via direnv.
+    # one `direnv allow` per clone. cocogitto also renders CHANGELOG.md.
+    checks.${system}.pre-commit = inputs.git-hooks.lib.${system}.run {
+      src = ./.;
+      hooks.cog = {
+        enable = true;
+        name = "cocogitto conventional-commit check";
+        entry = "${pkgs.cocogitto}/bin/cog verify --file";
+        language = "system";
+        stages = ["commit-msg"];
+        pass_filenames = true;
+      };
+    };
+
+    devShells.${system}.default = pkgs.mkShell {
+      inherit (self.checks.${system}.pre-commit) shellHook;
+      buildInputs =
+        self.checks.${system}.pre-commit.enabledPackages
+        ++ [pkgs.cocogitto];
     };
   };
 }
