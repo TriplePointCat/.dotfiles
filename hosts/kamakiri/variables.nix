@@ -1,4 +1,8 @@
 {
+  # Host identity ( read by flake.nix to wire drivers + user )
+  profile = "nvidia"; # driver bundle under ./profiles
+  user = "lottie";
+
   # Git Configuration ( For Pulling Software Repos )
   gitUsername = "658060";
   gitEmail = "31701136+658060@users.noreply.github.com";

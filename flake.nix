@@ -6,7 +6,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     nur.url = "github:nix-community/NUR";
     nvf.url = "github:notashelf/nvf";
     quickshell = {
@@ -31,11 +32,8 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
+    inherit (nixpkgs) lib;
     pkgs = nixpkgs.legacyPackages.${system};
-    # leaving these empty in the repo to keep conflicts between machines away.
-    host = "";
-    profile = "";
-    username = "";
 
     overlays = [
       (final: prev: {
@@ -45,86 +43,32 @@
         });
       })
     ];
-  in {
-    nixosConfigurations = {
-      amd = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-        };
-        modules = [
-          ./profiles/amd
-          {nixpkgs.overlays = overlays;}
-        ];
+
+    # Auto-discover every host directory under ./hosts and build one
+    # nixosConfiguration per hostname. Each host's variables.nix names its own
+    # `profile` (driver bundle) and `user` (identity), so flake.nix is never
+    # edited per-machine — adding a device is just dropping in hosts/<name>/.
+    # Build with `--hostname $(hostname)` (see the fr/fu aliases).
+    hosts = builtins.attrNames (
+      lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts)
+    );
+
+    mkHost = host: let
+      vars = import ./hosts/${host}/variables.nix;
+    in lib.nixosSystem {
+      inherit system;
+      specialArgs = {
+        inherit inputs host;
+        inherit (vars) profile;
+        username = vars.user;
       };
-      nvidia = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-        };
-        modules = [
-          ./profiles/nvidia
-          {nixpkgs.overlays = overlays;}
-        ];
-      };
-      nvidia-laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-        };
-        modules = [
-          ./profiles/nvidia-laptop
-          {nixpkgs.overlays = overlays;}
-        ];
-      };
-      intel = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-        };
-        modules = [
-          ./profiles/intel
-        ];
-      };
-      vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-        };
-        modules = [
-          ./profiles/vm
-          {nixpkgs.overlays = overlays;}
-        ];
-      };
-      iso = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-        };
-        modules = [
-          ./profiles/iso
-          {nixpkgs.overlays = overlays;}
-        ];
-      };
+      modules = [
+        ./profiles/${vars.profile}
+        {nixpkgs.overlays = overlays;}
+      ];
     };
+  in {
+    nixosConfigurations = lib.genAttrs hosts mkHost;
 
     # dev tooling: a self-installing commit-msg hook enforcing conventional
     # commits. Activated by `.envrc` (`use flake`) via direnv.

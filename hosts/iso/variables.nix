@@ -1,6 +1,6 @@
 {
   # Host identity ( read by flake.nix to wire drivers + user )
-  profile = "amd"; # driver bundle under ./profiles
+  profile = "iso"; # live installer image under ./profiles
   user = "lottie";
 
   # Git Configuration ( For Pulling Software Repos )
@@ -9,8 +9,7 @@
 
   # Hyprland Settings
   extraMonitorSettings = [
-    { output = "";         mode = "1920x1080@60";  position = "auto";      scale = "1"; }
-    { output = "HDMI-A-1"; mode = "3840x2160@60";  position = "auto-left"; scale = "1"; }
+    { output = ""; mode = "1920x1080@60"; position = "auto"; scale = "1"; }
   ];
   extraHardwareSettings = {};
   defaultWallpaper = "hollow-knight.png";
@@ -18,9 +17,9 @@
   theme = "catppuccin-mocha";
 
   fontSizes = {
-    applications = 14;
-    terminal = 18;
-    desktop = 12;
+    applications = 12;
+    terminal = 15;
+    desktop = 11;
     popups = 12;
   };
 
@@ -29,8 +28,8 @@
 
   # variables which toggle packages
   gamedev = false;
-  gaming = true;
-  texlive = true;
+  gaming = false;
+  texlive = false;
   silly = false;
 
   # Program Options
@@ -48,5 +47,5 @@
   nvidiaID = "PCI:0:2:0";
 
   # Enable NFS
-  enableNFS = true;
+  enableNFS = false;
 }
