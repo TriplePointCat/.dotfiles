@@ -1,19 +1,22 @@
 # cocogitto configuration.
 #
 # Enforcement: `cog verify` runs as the commit-msg hook (wired in flake.nix).
-# Changelog:   `cog changelog > CHANGELOG.md` regenerates the changelog.
+# Changelog:   regenerate with the anchored range (NOT bare `cog changelog`):
 #
-# We deliberately do NOT version-bump or tag (see docs/adr/0001): the changelog
-# is read forward from the commit a downstream fork last merged. cocogitto owns
-# CHANGELOG.md and regenerates it over the full history; most pre-adoption
-# commits aren't Conventional Commits and are skipped (a few old `refactor:`
-# ones leak in harmlessly. an accepted trade-off for not tagging an anchor).
+#     cog changelog c776e846~1.. > CHANGELOG.md
+#
+# We deliberately do NOT version-bump or tag (see docs/adr/0001). c776e846 is the
+# commit that adopted Conventional Commits; everything before it predates the
+# convention and has already been integrated by downstream forks, so the anchor
+# pins generation there (the `~1` makes c776e846 itself inclusive). The custom
+# template (cog/changelog.tera) renders ONLY breaking changes — the sole thing a
+# downstream maintainer must act on (see docs/adr/0002), newest-first.
 
 ignore_merge_commits = true
 
 [changelog]
 path = "CHANGELOG.md"
-template = "remote"
+template = "cog/changelog.tera"
 remote = "github.com"
 repository = ".dotfiles"
 owner = "658060"

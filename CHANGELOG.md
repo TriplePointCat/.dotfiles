@@ -1,7 +1,6 @@
-## Unreleased ([e9fccde..a66b132](https://github.com/658060/.dotfiles/compare/e9fccde..a66b132))
-#### Refactoring
-- make system packages variable-dependent - ([ed7fd53](https://github.com/658060/.dotfiles/commit/ed7fd53d03ce7fa9e5064aef1d9e7d42b04790af)) - 658060
-- add variables.nix modules - ([2375cce](https://github.com/658060/.dotfiles/commit/2375cce457efd5a7b1134babb3e0a8f9d8dd1dca)) - 658060
-- remove host-packages.nix - ([b1d6966](https://github.com/658060/.dotfiles/commit/b1d6966e1320fb9a7515b6273c583d33254dbdd5)) - 658060
+## Unreleased ([a66b132..04d6caf](https://github.com/658060/.dotfiles/compare/a66b132..04d6caf))
+#### Breaking Changes
+- ![BREAKING](https://img.shields.io/badge/BREAKING-red) type the variables contract as a submodule - ([04d6caf](https://github.com/658060/.dotfiles/commit/04d6caf10e080fb542cb359c9dd415e9097e8773)) - 658060
+- ![BREAKING](https://img.shields.io/badge/BREAKING-red) auto-discover hosts keyed by hostname - ([8fac9c4](https://github.com/658060/.dotfiles/commit/8fac9c4c376bb8d7fa0c3f6adc0ee498a6d8a6da)) - 658060
 
 

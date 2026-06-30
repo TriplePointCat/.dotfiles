@@ -28,8 +28,15 @@ single maintainer working across many devices over years.
 
 - `CHANGELOG.md` is **upstream-generated and downstream-read-only**. Forks must
   never regenerate it (doing so would conflict on every merge). cocogitto owns
-  the whole file and regenerates it over full history (no anchor tag, per
-  ADR-0001); a few pre-adoption `refactor:` commits leak in harmlessly.
+  the whole file, regenerated with an anchored range — `cog changelog
+  c776e846~1.. > CHANGELOG.md` — where `c776e846` is the convention-adoption
+  commit. Anchoring there (rather than walking full history) keeps pre-adoption,
+  non-Conventional commits out instead of leaking a few `refactor:` ones; we use
+  a fixed SHA in the command, not a tag, per ADR-0001.
+- The changelog renders **only breaking changes**, newest-first, via a custom
+  template (`cog/changelog.tera`). Downstream forks have already integrated
+  everything before the anchor, so the file is a forward-read list of exactly
+  the changes that still require manual action — not a full grouped history.
 - The convention, devShell, and hook config are committed, so downstream forks
   inherit Conventional-Commit enforcement on their own commits by default. They
   may remove `.envrc` if unwanted.
