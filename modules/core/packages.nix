@@ -72,6 +72,8 @@
       mullvad-vpn
       nicotine-plus
       obs-studio
+      opencode # for work
+      outfox
       pavucontrol
       pciutils
       picard
