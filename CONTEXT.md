@@ -59,14 +59,17 @@ _Avoid_: machine, node, system (overloaded by NixOS).
 
 **Profile**:
 A hardware-class selection (`amd`, `nvidia`, `nvidia-laptop`, `intel`, `vm`,
-`iso`) that wires up the right drivers. The `nixosConfigurations` are keyed by
-profile, not by host.
+`iso`) that wires up the right drivers. A host names its profile as data in its
+own `variables.nix`; `flake.nix` reads it at eval time to import
+`./profiles/<profile>`. Since ADR-0004 the `nixosConfigurations` are keyed by
+host, not by profile.
 _Avoid_: variant, flavor.
 
 **User**:
 One of the people who runs this config. Distinct from Host (one user has many
-hosts) and currently entangled with both (`username` lives in `flake.nix`;
-`gitUsername`/`gitEmail` live in the host's `variables.nix`).
+hosts). Since ADR-0004 a host names its `user` as data in its own
+`variables.nix` (read by `flake.nix`), alongside `gitUsername`/`gitEmail`. No
+global `username` in `flake.nix` anymore.
 
 **Native UI file**:
 A desktop-UI config authored in its own language (`.lua`, `.qml`, `.jsonc`,
