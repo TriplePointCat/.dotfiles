@@ -2,6 +2,9 @@
   # Host identity ( read by flake.nix to wire drivers + user )
   profile = "nvidia"; # driver bundle under ./profiles
   user = "lottie";
+  sshAuthorizedKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPxvLjTg/ZPIWQ8EgG8BOoBF7ZQTIPyERo0SPAkihEWa lottie@laptop2"
+  ];
 
   # Git Configuration ( For Pulling Software Repos )
   gitUsername = "658060";

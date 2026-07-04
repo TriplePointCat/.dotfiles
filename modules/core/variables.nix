@@ -32,6 +32,11 @@ in {
           type = types.str;
           description = "Primary username for this host.";
         };
+        sshAuthorizedKeys = mkOption {
+          type = types.listOf types.str;
+          default = [];
+          description = "SSH public keys allowed to log in as the primary user on this host. Empty by default; each host opts in explicitly.";
+        };
 
         # design mode (ADR-0005) — fast visual iteration on native UI files
         designMode = mkOption {

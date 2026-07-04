@@ -43,9 +43,7 @@ in {
     ];
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPxvLjTg/ZPIWQ8EgG8BOoBF7ZQTIPyERo0SPAkihEWa lottie@laptop2"
-    ];
+    openssh.authorizedKeys.keys = config.variables.sshAuthorizedKeys;
   };
   nix.settings.allowed-users = ["${username}"];
 }
