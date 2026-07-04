@@ -53,20 +53,35 @@
       lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts)
     );
 
+    # The driver bundles a host may name; read straight off ./profiles so this
+    # stays correct as profiles come and go (same auto-discovery as hosts).
+    validProfiles = builtins.attrNames (
+      lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./profiles)
+    );
+
     mkHost = host: let
       vars = import ./hosts/${host}/variables.nix;
-    in lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit inputs host;
-        inherit (vars) profile;
-        username = vars.user;
-      };
-      modules = [
-        ./profiles/${vars.profile}
-        {nixpkgs.overlays = overlays;}
-      ];
-    };
+      # profile is read here, before the module system runs, to pick which
+      # profile to import — so it can't go through the typed variables schema.
+      # Guard it explicitly instead: a bad profile names a clear error, not a
+      # bare "path ./profiles/<typo> does not exist".
+      profile =
+        vars.profile
+        or (throw "host '${host}': hosts/${host}/variables.nix must set `profile`.");
+    in
+      assert lib.assertMsg (builtins.elem profile validProfiles)
+      "host '${host}': profile '${profile}' is not one of ${toString validProfiles} (a directory under ./profiles).";
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs host profile;
+            username = vars.user;
+          };
+          modules = [
+            ./profiles/${profile}
+            {nixpkgs.overlays = overlays;}
+          ];
+        };
   in {
     nixosConfigurations = lib.genAttrs hosts mkHost;
 
