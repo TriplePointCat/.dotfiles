@@ -134,47 +134,54 @@ for section, opts in pairs(vars.hardware) do
 end
 
 -- ── Keybinds ─────────────────────────────────────────────────────────────
--- Applications
-hl.bind("SUPER + Return",         hl.dsp.exec_cmd(vars.terminal))
-hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd("pypr toggle term"))
-hl.bind("SUPER + D",              hl.dsp.exec_cmd("rofi-launcher"))
-hl.bind("SUPER + SHIFT + W",      hl.dsp.exec_cmd("web-search"))
-hl.bind("SUPER + ALT + W",        hl.dsp.exec_cmd("wallsetter-visual"))
-hl.bind("SUPER + SHIFT + N",      hl.dsp.exec_cmd("swaync-client -rs"))
-hl.bind("SUPER + W",              hl.dsp.exec_cmd(vars.browser))
-hl.bind("SUPER + E",              hl.dsp.exec_cmd("emopicker9000"))
-hl.bind("SUPER + S",              hl.dsp.exec_cmd("screenshootin"))
-hl.bind("SUPER + SHIFT + D",      hl.dsp.exec_cmd("vesktop --enable-features=WebRTCPipeWireCapturer"))
-hl.bind("SUPER + O",              hl.dsp.exec_cmd("obs"))
-hl.bind("SUPER + C",              hl.dsp.exec_cmd("hyprpicker -a"))
-hl.bind("SUPER + G",              hl.dsp.exec_cmd("gamemode"))
-hl.bind("SUPER + T",              hl.dsp.exec_cmd("thunar"))
-hl.bind("SUPER + SHIFT + T",      hl.dsp.exec_cmd("pypr toggle thunar"))
-hl.bind("SUPER + M",              hl.dsp.exec_cmd("pavucontrol"))
-hl.bind("SUPER + P",              hl.dsp.exec_cmd("pypr toggle volume"))
--- Window management
-hl.bind("SUPER + Q",              hl.dsp.window.close())
-hl.bind("SUPER + SHIFT + P",      hl.dsp.layout("dwindle:toggle_pseudo"))
-hl.bind("SUPER + SHIFT + I",      hl.dsp.layout("dwindle:toggle_split"))
-hl.bind("SUPER + F",              hl.dsp.window.fullscreen())
-hl.bind("SUPER + CTRL + B",       hl.dsp.exec_cmd("pkill -SIGUSR1 waybar || waybar"))
-hl.bind("SUPER + CTRL + F",       hl.dsp.window.float({ action = "toggle" }))
-hl.bind("SUPER + CTRL + C",       hl.dsp.exit())
--- Move windows (vim motions)
-hl.bind("SUPER + CTRL + H",       hl.dsp.window.move({ direction = "left"  }))
-hl.bind("SUPER + CTRL + L",       hl.dsp.window.move({ direction = "right" }))
-hl.bind("SUPER + CTRL + K",       hl.dsp.window.move({ direction = "up"    }))
-hl.bind("SUPER + CTRL + J",       hl.dsp.window.move({ direction = "down"  }))
--- Resize windows (vim motions)
-hl.bind("SUPER + SHIFT + H",      hl.dsp.window.resize({ x = -30, y = 0   }))
-hl.bind("SUPER + SHIFT + L",      hl.dsp.window.resize({ x =  30, y = 0   }))
-hl.bind("SUPER + SHIFT + K",      hl.dsp.window.resize({ x = 0,   y = -30 }))
-hl.bind("SUPER + SHIFT + J",      hl.dsp.window.resize({ x = 0,   y =  30 }))
--- Focus (vim motions)
-hl.bind("SUPER + H",              hl.dsp.focus({ direction = "left"  }))
-hl.bind("SUPER + L",              hl.dsp.focus({ direction = "right" }))
-hl.bind("SUPER + K",              hl.dsp.focus({ direction = "up"    }))
-hl.bind("SUPER + J",              hl.dsp.focus({ direction = "down"  }))
+-- Described binds: one source for both the compositor binds and the rofi cheat
+-- sheet (`list-keybinds`). Native lua binds are opaque to `hyprctl binds` (they
+-- serialise as `__lua`), so these `h` strings are the only description source.
+-- Each row is { k = keys, d = dispatch, h = help }.
+local keybinds = {
+  -- Applications
+  { k = "SUPER + Return",         d = hl.dsp.exec_cmd(vars.terminal),                                    h = "Terminal" },
+  { k = "SUPER + SHIFT + Return", d = hl.dsp.exec_cmd("pypr toggle term"),                               h = "Dropdown terminal" },
+  { k = "SUPER + D",              d = hl.dsp.exec_cmd("rofi-launcher"),                                  h = "App launcher" },
+  { k = "SUPER + SHIFT + W",      d = hl.dsp.exec_cmd("web-search"),                                     h = "Web search" },
+  { k = "SUPER + ALT + W",        d = hl.dsp.exec_cmd("wallsetter-visual"),                              h = "Wallpaper picker" },
+  { k = "SUPER + SHIFT + N",      d = hl.dsp.exec_cmd("swaync-client -rs"),                              h = "Reload notifications" },
+  { k = "SUPER + W",              d = hl.dsp.exec_cmd(vars.browser),                                     h = "Browser" },
+  { k = "SUPER + E",              d = hl.dsp.exec_cmd("emopicker9000"),                                  h = "Emoji picker" },
+  { k = "SUPER + S",              d = hl.dsp.exec_cmd("screenshootin"),                                  h = "Screenshot" },
+  { k = "SUPER + SHIFT + D",      d = hl.dsp.exec_cmd("vesktop --enable-features=WebRTCPipeWireCapturer"), h = "Discord" },
+  { k = "SUPER + O",              d = hl.dsp.exec_cmd("obs"),                                            h = "OBS" },
+  { k = "SUPER + C",              d = hl.dsp.exec_cmd("hyprpicker -a"),                                  h = "Color picker" },
+  { k = "SUPER + G",              d = hl.dsp.exec_cmd("gamemode"),                                       h = "Toggle gamemode" },
+  { k = "SUPER + T",              d = hl.dsp.exec_cmd("thunar"),                                         h = "File manager" },
+  { k = "SUPER + SHIFT + T",      d = hl.dsp.exec_cmd("pypr toggle thunar"),                             h = "Dropdown file manager" },
+  { k = "SUPER + M",              d = hl.dsp.exec_cmd("pavucontrol"),                                    h = "Audio mixer" },
+  { k = "SUPER + P",              d = hl.dsp.exec_cmd("pypr toggle volume"),                             h = "Volume panel" },
+  -- Window management
+  { k = "SUPER + Q",              d = hl.dsp.window.close(),                                             h = "Close window" },
+  { k = "SUPER + SHIFT + P",      d = hl.dsp.layout("dwindle:toggle_pseudo"),                            h = "Toggle pseudo-tile" },
+  { k = "SUPER + SHIFT + I",      d = hl.dsp.layout("dwindle:toggle_split"),                             h = "Toggle split direction" },
+  { k = "SUPER + F",              d = hl.dsp.window.fullscreen(),                                        h = "Fullscreen" },
+  { k = "SUPER + CTRL + B",       d = hl.dsp.exec_cmd("pkill -SIGUSR1 waybar || waybar"),                h = "Toggle waybar" },
+  { k = "SUPER + CTRL + F",       d = hl.dsp.window.float({ action = "toggle" }),                        h = "Toggle floating" },
+  { k = "SUPER + CTRL + C",       d = hl.dsp.exit(),                                                     h = "Exit Hyprland" },
+  -- Move window (vim motions)
+  { k = "SUPER + CTRL + H",       d = hl.dsp.window.move({ direction = "left"  }),                       h = "Move window left" },
+  { k = "SUPER + CTRL + L",       d = hl.dsp.window.move({ direction = "right" }),                       h = "Move window right" },
+  { k = "SUPER + CTRL + K",       d = hl.dsp.window.move({ direction = "up"    }),                       h = "Move window up" },
+  { k = "SUPER + CTRL + J",       d = hl.dsp.window.move({ direction = "down"  }),                       h = "Move window down" },
+  -- Resize window (vim motions)
+  { k = "SUPER + SHIFT + H",      d = hl.dsp.window.resize({ x = -30, y = 0   }),                        h = "Resize window left" },
+  { k = "SUPER + SHIFT + L",      d = hl.dsp.window.resize({ x =  30, y = 0   }),                        h = "Resize window right" },
+  { k = "SUPER + SHIFT + K",      d = hl.dsp.window.resize({ x = 0,   y = -30 }),                        h = "Resize window up" },
+  { k = "SUPER + SHIFT + J",      d = hl.dsp.window.resize({ x = 0,   y =  30 }),                        h = "Resize window down" },
+  -- Focus (vim motions)
+  { k = "SUPER + H",              d = hl.dsp.focus({ direction = "left"  }),                             h = "Focus left" },
+  { k = "SUPER + L",              d = hl.dsp.focus({ direction = "right" }),                             h = "Focus right" },
+  { k = "SUPER + K",              d = hl.dsp.focus({ direction = "up"    }),                             h = "Focus up" },
+  { k = "SUPER + J",              d = hl.dsp.focus({ direction = "down"  }),                             h = "Focus down" },
+}
+for _, b in ipairs(keybinds) do hl.bind(b.k, b.d) end
 -- Move windows (arrow keys)
 hl.bind("SUPER + CTRL + left",    hl.dsp.window.move({ direction = "left"  }))
 hl.bind("SUPER + CTRL + right",   hl.dsp.window.move({ direction = "right" }))
@@ -244,6 +251,41 @@ hl.bind("XF86MonBrightnessUp",     hl.dsp.exec_cmd("brightnessctl set +5%"))
 -- Mouse binds
 hl.bind("SUPER + mouse:272",       hl.dsp.window.drag(),   { mouse = true })
 hl.bind("SUPER + mouse:273",       hl.dsp.window.resize(), { mouse = true })
+
+-- ── Keybind cheat sheet ──────────────────────────────────────────────────
+-- SUPER + / opens the sheet in rofi. The file below is regenerated on every
+-- load/`hyprctl reload` from the described `keybinds` table plus these summary
+-- rows for the repetitive literal binds (workspaces, arrows, media). Keep these
+-- rows in sync when the literal binds change; the described binds are automatic.
+hl.bind("SUPER + slash", hl.dsp.exec_cmd("list-keybinds"))
+
+local keybinds_help = {
+  { k = "SUPER + /",               h = "This cheat sheet" },
+  { k = "SUPER + [1-0]",           h = "Focus workspace 1-10" },
+  { k = "SUPER + SHIFT + [1-0]",   h = "Move window to workspace" },
+  { k = "SUPER + CTRL + [1-0]",    h = "Move window to workspace (silent)" },
+  { k = "SUPER + SPACE",           h = "Toggle special workspace" },
+  { k = "SUPER + CTRL + SPACE",    h = "Move window to special workspace" },
+  { k = "SUPER + arrows",          h = "Focus (same as h/j/k/l)" },
+  { k = "SUPER + scroll",          h = "Cycle workspaces" },
+  { k = "ALT + Tab",               h = "Cycle windows" },
+  { k = "SUPER + drag / rclick",   h = "Move / resize floating window" },
+  { k = "Media / brightness keys", h = "Volume, playback, backlight" },
+}
+
+do
+  local home = os.getenv("XDG_CACHE_HOME") or (os.getenv("HOME") .. "/.cache")
+  local f = io.open(home .. "/hypr-keybinds.txt", "w")
+  if f then
+    for _, b in ipairs(keybinds) do
+      f:write(string.format("%-30s  %s\n", b.k, b.h))
+    end
+    for _, b in ipairs(keybinds_help) do
+      f:write(string.format("%-30s  %s\n", b.k, b.h))
+    end
+    f:close()
+  end
+end
 
 -- ── Window rules ─────────────────────────────────────────────────────────
 -- Tag assignments
