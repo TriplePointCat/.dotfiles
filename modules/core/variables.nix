@@ -206,6 +206,38 @@ in {
           description = "Enable NFS support.";
         };
 
+        # per-host scheduled jobs
+        cronJobs = mkOption {
+          type = types.listOf (types.submodule {
+            options = {
+              name = mkOption {
+                type = types.str;
+                description = "Unique identifier for this job; names the generated systemd unit as \"cronjob-<name>\".";
+              };
+              schedule = mkOption {
+                type = types.str;
+                description = "systemd OnCalendar expression (e.g. \"daily\", \"*-*-* 03:00:00\").";
+              };
+              command = mkOption {
+                type = types.str;
+                description = "Shell command to run.";
+              };
+              user = mkOption {
+                type = types.nullOr types.str;
+                default = null;
+                description = "User to run the job as. Defaults to variables.user.";
+              };
+              description = mkOption {
+                type = types.str;
+                default = "";
+                description = "Human-readable description for the generated systemd unit.";
+              };
+            };
+          });
+          default = [];
+          description = "Per-host scheduled jobs, rendered as systemd timers (see modules/core/cron.nix). Empty by default; each host opts in explicitly.";
+        };
+
         # derived theme values, set by modules/core/stylix.nix
         colors = mkOption {
           type = types.attrsOf types.str;
