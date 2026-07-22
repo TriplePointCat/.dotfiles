@@ -11,8 +11,6 @@
   extraHardwareSettings = {};
   defaultWallpaper = "MST23.png";
 
-  theme = "catppuccin-mocha";
-
   fontSizes = {
     applications = 14;
     terminal = 18;
@@ -24,16 +22,7 @@
   clock24h = true;
 
   # variables which toggle packages
-  gamedev = false;
   gaming = true;
-  texlive = false;
-  silly = false;
-
-  # Program Options
-  browser = "zen"; # Set Default Browser (google-chrome-stable for google-chrome)
-  terminal = "kitty"; # Set Default System Terminal
-  keyboardLayout = "";
-  consoleKeyMap = "us";
 
   editor = "nvim";
   EDITOR = "nvim";

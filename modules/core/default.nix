@@ -2,6 +2,7 @@
   imports = [
     ./allow.nix
     ./boot.nix
+    ./cron.nix
     ./fonts.nix
     ./greetd.nix
     ./hardware.nix
