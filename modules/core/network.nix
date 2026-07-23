@@ -11,7 +11,6 @@
     firewall = {
       checkReversePath = "loose";
       enable = true;
-      checkReversePath = "loose";
       trustedInterfaces = ["tailscale0"];
       allowedTCPPorts = [
         22

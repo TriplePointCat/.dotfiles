@@ -85,6 +85,7 @@
       reaper
       signal-desktop
       socat
+      tailscale
       unrar
       unzip
       usbutils
