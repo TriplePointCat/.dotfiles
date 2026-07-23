@@ -10,6 +10,7 @@
     timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
     firewall = {
       enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = ["tailscale0"];
       allowedTCPPorts = [
         22

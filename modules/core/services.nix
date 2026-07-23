@@ -25,6 +25,7 @@
       enable = true;
       openFirewall = true;
     };
+    resolved.enable = true;
 
     smartd = {
       enable = false;
