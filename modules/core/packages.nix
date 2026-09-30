@@ -41,7 +41,8 @@
         agdaPackages.standard-library
       ])
       # fails to build 2025-11-15
-      # ardour
+      ardour
+      alsa-utils
       brightnessctl
       claude-code # unfortunately needed for work
       clock-rs
@@ -52,6 +53,7 @@
       eza
       ffmpeg
       file-roller
+      #fluidsynth
       fzf
       # fails to build 2026-01-01
       # gemini-cli
@@ -77,12 +79,12 @@
       pavucontrol
       pciutils
       picard
+      pipewire
       playerctl
       prusa-slicer
       qbittorrent-enhanced
       quickemu
       ripgrep
-      reaper
       signal-desktop
       socat
       tailscale
@@ -94,6 +96,8 @@
       wget
       zoxide
       xivlauncher
+      yoshimi
+      qjackctl
       qmk
       via
       #jellyfin
