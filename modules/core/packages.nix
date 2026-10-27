@@ -88,6 +88,7 @@
       signal-desktop
       socat
       tailscale
+      texliveFull
       unrar
       unzip
       usbutils

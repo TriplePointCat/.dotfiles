@@ -12,6 +12,9 @@
         vim.g.conceallevel = 2
         vim.api.nvim_command('unlet b:did_ftplugin')
         vim.api.nvim_command('call vimtex#init()')
+        vim.g.vimtex_compiler_method = "latexrun"
+        vim.opt.spell = true
+        vim.opt.spelling = {'en_us'}
       '';
     };
   };
